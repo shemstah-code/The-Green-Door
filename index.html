@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Green Door Jamaica · Rescue & Pet Care</title>
+  <meta name="description" content="We rescue, rehome and care for Jamaica's dogs and cats — and keep them happy with natural chews, gentle grooming, and a whole lot of patience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #1E5C3A;
+      --green:       #2E7D52;
+      --green-mid:   #4A9B6F;
+      --green-pale:  #E6F4EE;
+      --cream:       #FAF7F2;
+      --sand:        #F0E8D8;
+      --amber:       #C97D2E;
+      --amber-light: #E8A848;
+      --charcoal:    #1A1A18;
+      --text:        #2C2C2A;
+      --muted:       #6B6B68;
+      --border:      #E0D8CC;
+      --white:       #FFFFFF;
+      --radius:      12px;
+      --radius-lg:   20px;
+      --shadow:      0 2px 16px rgba(0,0,0,0.08);
+      --shadow-md:   0 4px 32px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; color: var(--text); background: var(--cream); }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; border: 2px solid transparent;
+    }
+    .btn-primary  { background: var(--amber); color: var(--white); border-color: var(--amber); }
+    .btn-primary:hover  { background: var(--amber-light); border-color: var(--amber-light); transform: translateY(-1px); }
+    .btn-outline  { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.6); }
+    .btn-outline:hover  { background: rgba(255,255,255,0.15); border-color: var(--white); }
+    .btn-green    { background: var(--green); color: var(--white); border-color: var(--green); }
+    .btn-green:hover    { background: var(--green-dark); border-color: var(--green-dark); transform: translateY(-1px); }
+    .btn-outline-dark { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.4); }
+    .btn-outline-dark:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: all 0.3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; max-width: 1160px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+      color: var(--white); transition: color 0.3s;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav.scrolled .nav-logo { color: var(--green-dark); }
+    .nav-logo-paw { width: 28px; height: 28px; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav.scrolled .nav-links a { color: var(--muted); }
+    .nav.scrolled .nav-links a:hover { color: var(--text); }
+    .nav-cta { padding: 10px 22px; font-size: 14px; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+    .nav.scrolled .nav-hamburger span { background: var(--charcoal); }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-cta-desktop { display: none; }
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+    .mobile-nav.open { display: block; }
+    .mobile-nav-drawer {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 280px;
+      background: var(--white); padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 0;
+      box-shadow: -4px 0 32px rgba(0,0,0,0.15);
+    }
+    .mobile-nav-close { font-size: 22px; cursor: pointer; color: var(--text); align-self: flex-end; margin-bottom: 24px; }
+    .mobile-nav a { display: block; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; color: var(--text); }
+    .mobile-nav a:hover { color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--green-dark) 0%, #1A4A2E 55%, #0E2D1A 100%);
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden; padding: 120px 0 100px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 70% 40%, rgba(74,155,111,0.12) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber-light); margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 78px); font-weight: 700;
+      color: var(--white); max-width: 760px; margin-bottom: 24px; line-height: 1.1;
+    }
+    .hero h1 em { color: var(--amber-light); font-style: italic; }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,0.72); max-width: 520px;
+      margin-bottom: 44px; font-weight: 300; line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.35); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--amber); color: var(--white); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+    .ticker-track { display: inline-flex; gap: 0; animation: ticker 28s linear infinite; }
+    .ticker-item { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 28px; }
+    .ticker-sep { opacity: 0.5; padding: 0; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTIONS ── */
+    .section { padding: 96px 0; }
+    .section-alt { background: var(--sand); }
+    .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+    .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; margin-bottom: 16px; }
+    .section-sub { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.75; }
+    .section-header { margin-bottom: 56px; }
+
+    /* ── GLANCE CARDS ── */
+    .glance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .glance-card { background: var(--white); border-radius: var(--radius-lg); padding: 36px 32px; border: 1px solid var(--border); }
+    .glance-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .glance-value { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; }
+    @media (max-width: 600px) { .glance-grid { grid-template-columns: 1fr; } }
+
+    /* ── MISSION ── */
+    .mission-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-quote {
+      font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 32px);
+      font-style: italic; line-height: 1.5;
+      position: relative; padding-left: 28px; color: var(--text);
+    }
+    .mission-quote::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 4px; background: var(--green); border-radius: 2px;
+    }
+    .mission-body { font-size: 16px; color: var(--muted); line-height: 1.8; }
+    .mission-body + .mission-body { margin-top: 16px; }
+    .mission-sig { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 14px; font-weight: 600; color: var(--text); }
+    .mission-sig-line { width: 32px; height: 2px; background: var(--amber); }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
+    .stat-box { background: var(--green-pale); border-radius: var(--radius); padding: 20px 22px; }
+    .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--text); }
+    @media (max-width: 768px) { .mission-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── BONE + SNUGGLE ── */
+    .steps-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 60px; align-items: end; }
+    .ba-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+    .ba-card { border-radius: var(--radius-lg); padding: 36px 28px; }
+    .ba-before { background: var(--sand); border: 1px solid var(--border); }
+    .ba-care   { background: var(--green); color: var(--white); }
+    .ba-after  { background: var(--green-pale); border: 1px solid #B8DEC9; }
+    .ba-tag    { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.65; margin-bottom: 16px; }
+    .ba-quote  { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; margin-bottom: 10px; }
+    .ba-desc   { font-size: 14px; opacity: 0.72; line-height: 1.65; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px; }
+    .step-card { background: var(--white); border-radius: var(--radius-lg); padding: 30px 24px; border: 1px solid var(--border); }
+    .step-num  { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: var(--green-pale); line-height: 1; margin-bottom: 16px; }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .step-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .journey-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden;
+    }
+    .journey-item { padding: 28px 20px; border-right: 1px solid var(--border); text-align: center; }
+    .journey-item:last-child { border-right: none; }
+    .journey-icon { font-size: 28px; margin-bottom: 10px; }
+    .journey-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .journey-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    @media (max-width: 900px) {
+      .steps-split { grid-template-columns: 1fr; gap: 24px; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .journey-bar { grid-template-columns: repeat(2, 1fr); }
+      .journey-item:nth-child(2) { border-right: none; }
+      .journey-item:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+      .journey-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+    }
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .journey-bar { grid-template-columns: 1fr; }
+      .journey-item { border-right: none !important; border-top: 1px solid var(--border); }
+      .journey-item:first-child { border-top: none; }
+    }
+
+    /* ── DISASTER ── */
+    .disaster { background: linear-gradient(140deg, #111110 0%, #0B2C1A 100%); color: var(--white); padding: 96px 0; }
+    .disaster-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 0; }
+    .disaster-badge {
+      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber-light); background: rgba(232,168,72,0.15); border: 1px solid rgba(232,168,72,0.3);
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .disaster-title { font-size: clamp(28px, 4vw, 52px); font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .disaster-body { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+    .disaster-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+    .disaster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .d-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg); padding: 28px 22px;
+      transition: background 0.2s;
+    }
+    .d-card:hover { background: rgba(255,255,255,0.1); }
+    .d-icon  { font-size: 26px; margin-bottom: 12px; }
+    .d-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .d-desc  { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    @media (max-width: 768px) {
+      .disaster-inner { grid-template-columns: 1fr; gap: 48px; }
+      .disaster-grid  { grid-template-columns: 1fr; }
+    }
+
+    /* ── CHEWS ── */
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .product-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .product-img {
+      height: 220px; background: var(--sand); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img img { transform: scale(1.04); }
+    .product-body { padding: 24px; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .product-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .product-link { font-size: 14px; font-weight: 600; color: var(--green); display: inline-flex; align-items: center; gap: 4px; }
+    .product-link:hover { color: var(--green-dark); }
+    @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }
+
+    /* ── GROOMING ── */
+    .grooming-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+    .grooming-note { background: var(--green-pale); border-radius: var(--radius-lg); padding: 36px 32px; margin-top: 32px; }
+    .grooming-note-quote { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: var(--green-dark); margin-bottom: 10px; }
+    .grooming-note-body { font-size: 15px; color: var(--text); line-height: 1.7; }
+    .services-list { display: flex; flex-direction: column; gap: 14px; }
+    .service-card {
+      background: var(--white); border-radius: var(--radius); padding: 22px 24px;
+      border: 1px solid var(--border); display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 16px; transition: border-color 0.2s;
+    }
+    .service-card:hover { border-color: var(--green-mid); }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .service-desc { font-size: 14px; color: var(--muted); }
+    .service-badge { font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
+    .badge-book   { color: var(--green); background: var(--green-pale); }
+    .badge-ask    { color: var(--amber); background: rgba(201,125,46,0.12); }
+    @media (max-width: 768px) { .grooming-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── HELP ── */
+    .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .help-card {
+      background: var(--white); border-radius: var(--radius-lg); padding: 36px 28px;
+      border: 1px solid var(--border); display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .help-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .help-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+    .help-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+    .help-body  { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; flex: 1; }
+    .help-cta   { font-size: 14px; font-weight: 600; color: var(--green); display: inline-flex; align-items: center; gap: 4px; }
+    .help-cta:hover { color: var(--green-dark); }
+    .help-note  { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    @media (max-width: 900px) { .help-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .help-grid { grid-template-columns: 1fr; } }
+
+    /* ── REEL ── */
+    .reel-section { background: var(--green); color: var(--white); padding: 88px 0; text-align: center; }
+    .reel-title { font-size: clamp(28px, 4vw, 48px); color: var(--white); margin-bottom: 16px; }
+    .reel-sub { color: rgba(255,255,255,0.68); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; font-size: 17px; line-height: 1.7; }
+    .reel-btn {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: var(--white); color: var(--green-dark); padding: 18px 36px;
+      border-radius: 100px; font-size: 16px; font-weight: 600; transition: all 0.2s;
+    }
+    .reel-btn:hover { background: var(--amber-light); color: var(--white); transform: translateY(-2px); }
+    .reel-ig {
+      width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+      background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 16px; font-weight: 900;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+    .contact-items { display: flex; flex-direction: column; gap: 24px; }
+    .c-item { display: flex; gap: 16px; align-items: flex-start; }
+    .c-icon { width: 44px; height: 44px; background: var(--green-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .c-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .c-val   { font-size: 15px; color: var(--text); }
+    .c-note  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 15px;
+      color: var(--text); background: var(--white); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--green); box-shadow: 0 0 0 3px rgba(46,125,82,0.1);
+    }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-submit {
+      width: 100%; padding: 16px; background: var(--green); color: var(--white);
+      border: none; border-radius: 100px; font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+    @media (max-width: 768px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.65); padding: 64px 0 32px; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .footer-paw  { width: 26px; height: 26px; flex-shrink: 0; }
+    .footer-tagline { font-size: 14px; line-height: 1.65; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a {
+      width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 14px; font-style: normal;
+      transition: background 0.2s;
+    }
+    .footer-social a:hover { background: var(--green); }
+    .footer-col-title { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    }
+
+    /* ── FADE UP ── */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <svg class="nav-logo-paw" viewBox="0 0 44 48" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="22" cy="36" rx="14" ry="11" fill="currentColor"/>
+        <ellipse cx="7"  cy="22" rx="5"   ry="6.5" fill="currentColor"/>
+        <ellipse cx="16" cy="13" rx="5.5" ry="7"   fill="currentColor"/>
+        <ellipse cx="28" cy="13" rx="5.5" ry="7"   fill="currentColor"/>
+        <ellipse cx="37" cy="22" rx="5"   ry="6.5" fill="currentColor"/>
+      </svg>
+      The Green Door
+    </a>
+    <ul class="nav-links">
+      <li><a href="#rescue">Rescue</a></li>
+      <li><a href="#mellissa">Mellissa</a></li>
+      <li><a href="#chews">Chews</a></li>
+      <li><a href="#grooming">Grooming</a></li>
+      <li><a href="#help">Help out</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#help" class="btn btn-primary nav-cta nav-cta-desktop">Adopt &amp; donate</a>
+    <div class="nav-hamburger" id="hamburger" onclick="openNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" onclick="closeNavOutside(event)">
+  <div class="mobile-nav-drawer">
+    <span class="mobile-nav-close" onclick="closeNav()">✕</span>
+    <a href="#rescue"   onclick="closeNav()">Rescue</a>
+    <a href="#mellissa" onclick="closeNav()">Hurricane Mellissa</a>
+    <a href="#chews"    onclick="closeNav()">Chews</a>
+    <a href="#grooming" onclick="closeNav()">Grooming</a>
+    <a href="#help"     onclick="closeNav()">Help out</a>
+    <a href="#contact"  onclick="closeNav()">Contact</a>
+    <a href="#help" class="btn btn-green" style="margin-top:20px;justify-content:center;" onclick="closeNav()">Adopt &amp; donate</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="container hero-content">
+    <div class="hero-eyebrow">Jamaica · Rescue &amp; Pet Care</div>
+    <h1>Every animal deserves a <em>green door</em> to walk through.</h1>
+    <p class="hero-sub">We rescue, rehome and care for the island's dogs and cats — and keep them happy with natural chews, gentle grooming, and a whole lot of patience.</p>
+    <div class="hero-actions">
+      <a href="#help"  class="btn btn-primary">Adopt or donate</a>
+      <a href="#chews" class="btn btn-outline">See our chews &amp; care</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Rescue</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Chews</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Grooming</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Made in Jamaica</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Adopt</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Foster</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Donate</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Rescue</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Chews</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Grooming</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Made in Jamaica</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Adopt</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Foster</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Donate</span><span class="ticker-sep"> · </span>
+  </div>
+</div>
+
+<!-- WHAT WE DO -->
+<section class="section" id="rescue">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">What we do</div>
+      <h2 class="section-title">Rescue, chews &amp; grooming</h2>
+      <p class="section-sub">Based in Jamaica. Working island-wide. For the dogs, cats and the people who love them.</p>
+    </div>
+    <div class="glance-grid fade-up">
+      <div class="glance-card">
+        <div class="glance-label">Where</div>
+        <div class="glance-value">Based in Jamaica · island-wide</div>
+      </div>
+      <div class="glance-card">
+        <div class="glance-label">We care for</div>
+        <div class="glance-value">Dogs &amp; cats, mostly strays</div>
+      </div>
+      <div class="glance-card">
+        <div class="glance-label">We offer</div>
+        <div class="glance-value">Adoption · chews · grooming</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="mission-inner">
+      <div class="fade-up">
+        <div class="section-label">Our mission</div>
+        <p class="mission-quote">A small rescue with a soft spot for the island's strays.</p>
+        <div class="mission-sig">
+          <div class="mission-sig-line"></div>
+          From the team at The Green Door
+        </div>
+      </div>
+      <div class="fade-up">
+        <p class="mission-body">The Green Door started the way most rescues do — one hungry dog at the gate, then another. Today we focus on a handful of animals at a time, so each one gets the food, vet care and patience they need before going to a new home.</p>
+        <p class="mission-body">Alongside the rescue work, we make small-batch natural chews and offer gentle grooming. Everything we sell helps fund the next rescue, the next vet visit, the next ride home.</p>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Based</div>
+            <div class="stat-val">Jamaica · island-wide outreach</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">We care for</div>
+            <div class="stat-val">Dogs &amp; cats, mostly strays</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">We offer</div>
+            <div class="stat-val">Adoption · chews · grooming</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Status</div>
+            <div class="stat-val">Rescue &amp; community org</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONE + SNUGGLE -->
+<section class="section">
+  <div class="container">
+    <div class="steps-split fade-up">
+      <div>
+        <div class="section-label">The bone + snuggle effect</div>
+        <h2 class="section-title">From side-eye to tail-wag in four tiny acts of care.</h2>
+      </div>
+      <p class="section-sub">Rescue work is patient work: safety first, then food, comfort, grooming, and small happy moments. A good chew and a gentle cuddle can turn a worried tail into a wagging one.</p>
+    </div>
+
+    <div class="ba-grid fade-up">
+      <div class="ba-card ba-before">
+        <div class="ba-tag">Before</div>
+        <div class="ba-quote">"Who are you?"</div>
+        <div class="ba-desc">Many rescues need quiet, routine, and time before they can relax around people again.</div>
+      </div>
+      <div class="ba-card ba-care">
+        <div class="ba-tag">Care</div>
+        <div class="ba-quote">Bone + bath + brush + snuggle</div>
+        <div class="ba-desc">Natural chews, gentle grooming, and kind hands help make care feel safe instead of scary.</div>
+      </div>
+      <div class="ba-card ba-after">
+        <div class="ba-tag">After</div>
+        <div class="ba-quote">"Okay, I live here now."</div>
+        <div class="ba-desc">The goal: healthier pets, softer landings, and more happy animals ready for their next home.</div>
+      </div>
+    </div>
+
+    <div class="steps-grid fade-up">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">Decompress first</div>
+        <div class="step-body">A quiet corner, clean water, and predictable routine help a new rescue understand that nothing bad is coming next.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">Offer a safe chew</div>
+        <div class="step-body">Chewing gives dogs something natural to do with nervous energy, especially after a big change or grooming visit.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">Go gentle with grooming</div>
+        <div class="step-body">Short sessions, soft handling, and breaks turn brushing, bathing, and nail care into trust-building time.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-title">End with affection</div>
+        <div class="step-body">A snuggle, praise, or a calm sit-together helps the animal link care with comfort, not pressure.</div>
+      </div>
+    </div>
+
+    <div class="journey-bar fade-up" style="margin-top:24px;">
+      <div class="journey-item">
+        <div class="journey-icon">🏠</div>
+        <div class="journey-title">Rescue</div>
+        <div class="journey-desc">Safe pickup, food, water, and a calm place to rest.</div>
+      </div>
+      <div class="journey-item">
+        <div class="journey-icon">🫶</div>
+        <div class="journey-title">Care</div>
+        <div class="journey-desc">Vet support, grooming, enrichment, chews, and patience.</div>
+      </div>
+      <div class="journey-item">
+        <div class="journey-icon">🐾</div>
+        <div class="journey-title">Trust</div>
+        <div class="journey-desc">Small positive moments repeated until tails loosen.</div>
+      </div>
+      <div class="journey-item">
+        <div class="journey-icon">🏡</div>
+        <div class="journey-title">Home</div>
+        <div class="journey-desc">Adoption, foster placement, or ongoing sanctuary care.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISASTER RESPONSE -->
+<section class="disaster" id="mellissa">
+  <div class="container">
+    <div class="disaster-inner">
+      <div class="fade-up">
+        <div class="disaster-badge">Priority · Dogs + cats first</div>
+        <h2 class="disaster-title">After Hurricane Mellissa, every dog and cat needs a safe next step.</h2>
+        <p class="disaster-body">Storms separate animals from homes, medicine, food, and the people who know them. The Green Door Jamaica is building a recovery push to rehome displaced pets, vaccinate at-risk animals, and spay or neuter dogs and cats so the crisis does not become a second wave of suffering.</p>
+        <div class="disaster-actions">
+          <a href="#help"    class="btn btn-primary">Help the recovery push</a>
+          <a href="#contact" class="btn btn-outline-dark">Report an animal in need</a>
+        </div>
+      </div>
+      <div class="disaster-grid fade-up">
+        <div class="d-card">
+          <div class="d-icon">🏠</div>
+          <div class="d-title">Rehome</div>
+          <div class="d-desc">Match displaced animals with foster homes, adopters, or safe temporary care.</div>
+        </div>
+        <div class="d-card">
+          <div class="d-icon">💉</div>
+          <div class="d-title">Vaccinate</div>
+          <div class="d-desc">Coordinate core vaccines and vet checks for dogs and cats exposed after the storm.</div>
+        </div>
+        <div class="d-card">
+          <div class="d-icon">✚</div>
+          <div class="d-title">Spay + neuter</div>
+          <div class="d-desc">Prevent accidental litters while families, shelters, and communities recover.</div>
+        </div>
+        <div class="d-card">
+          <div class="d-icon">🥣</div>
+          <div class="d-title">Feed + comfort</div>
+          <div class="d-desc">Provide food, chews, grooming, and calm handling so frightened animals can decompress.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEWS -->
+<section class="section section-alt" id="chews">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Chews &amp; treats</div>
+      <h2 class="section-title">Natural chews, made small-batch on the island.</h2>
+      <p class="section-sub">Simple, single-ingredient treats your dog will actually slow down to enjoy. Every bag sold helps feed a rescue.</p>
+    </div>
+    <div class="products-grid fade-up">
+      <div class="product-card">
+        <div class="product-img"><img src="https://drive.google.com/uc?export=view&id=18HK3MGN1Xqt8P0qC2nPdACOmIUae2uT2" alt="Slow-roast chews" /></div>
+        <div class="product-body">
+          <div class="product-name">Slow-roast chews</div>
+          <div class="product-desc">Long-lasting natural chews, oven-finished in small batches. No fillers, no mystery — just one ingredient on the label.</div>
+          <a href="#contact" class="product-link">Order now →</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><img src="https://drive.google.com/uc?export=view&id=1BgBN78JcjuhZrbDMMVDJG6zUvxhJC-9c" alt="Training bites" /></div>
+        <div class="product-body">
+          <div class="product-name">Training bites</div>
+          <div class="product-desc">Tiny, high-value training treats — soft enough for puppies, tempting enough for the most distracted street rescue.</div>
+          <a href="#contact" class="product-link">Order now →</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><img src="https://drive.google.com/uc?export=view&id=1vQQYkz0vWDhr8QrCXD2Ycztqr40ya-pk" alt="Island botanicals" /></div>
+        <div class="product-body">
+          <div class="product-name">Island botanicals</div>
+          <div class="product-desc">Coconut, turmeric and moringa biscuits — gentle on stomachs, made with ingredients we'd eat ourselves.</div>
+          <a href="#contact" class="product-link">Order now →</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><img src="https://drive.google.com/uc?export=view&id=1JyaMXRNAfjzeN9OjVJss4LLfh0pNF_Fb" alt="Rescue support bundles" /></div>
+        <div class="product-body">
+          <div class="product-name">Rescue support bundles</div>
+          <div class="product-desc">Pick a bundle and we'll send chews to a rescue dog still waiting for a home — a small treat while they wait.</div>
+          <a href="#contact" class="product-link">Get a bundle →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROOMING -->
+<section class="section" id="grooming">
+  <div class="container">
+    <div class="grooming-inner">
+      <div class="fade-up">
+        <div class="section-label">Grooming</div>
+        <h2 class="section-title">Gentle grooming, on your pet's pace.</h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.75;margin-top:14px;margin-bottom:28px;">Many of our visitors are first-time groomees, rescues, or seniors who've had a hard time. We take it slow, work in a quiet space, and never rush a nervous animal.</p>
+        <a href="#contact" class="btn btn-green">Book a groom</a>
+        <div class="grooming-note">
+          <div class="grooming-note-quote">"We never rush a nervous animal."</div>
+          <div class="grooming-note-body">Short sessions, soft handling, and breaks build trust. Grooming should feel safe, not scary — so we let each animal set the pace.</div>
+        </div>
+      </div>
+      <div class="services-list fade-up">
+        <div class="service-card">
+          <div>
+            <div class="service-name">Bath &amp; tidy</div>
+            <div class="service-desc">Warm bath, nail trim, ear clean, light brush-out.</div>
+          </div>
+          <a href="#contact" class="service-badge badge-book">Book →</a>
+        </div>
+        <div class="service-card">
+          <div>
+            <div class="service-name">Full groom</div>
+            <div class="service-desc">Breed-appropriate cut, de-shed, paws &amp; sanitary trim.</div>
+          </div>
+          <a href="#contact" class="service-badge badge-book">Book →</a>
+        </div>
+        <div class="service-card">
+          <div>
+            <div class="service-name">Puppy &amp; senior intro</div>
+            <div class="service-desc">A short, low-pressure session for first-timers.</div>
+          </div>
+          <a href="#contact" class="service-badge badge-book">Book →</a>
+        </div>
+        <div class="service-card">
+          <div>
+            <div class="service-name">Rescue grooming</div>
+            <div class="service-desc">Free or sliding-scale grooming for fellow rescues — ask us.</div>
+          </div>
+          <a href="#contact" class="service-badge badge-ask">Ask us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAYS TO HELP -->
+<section class="section section-alt" id="help">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Ways to help</div>
+      <h2 class="section-title">There's more than one way to open the door.</h2>
+      <p class="section-sub">Adopt, sponsor, volunteer, or just spread the word — every bit keeps the rescue going.</p>
+    </div>
+    <div class="help-grid fade-up">
+      <div class="help-card">
+        <div class="help-eyebrow">Adopt</div>
+        <div class="help-title">Find your match</div>
+        <div class="help-body">Browse the dogs and cats currently looking for a family. Each comes vaccinated, vet-checked and with a back-story from their foster carer.</div>
+        <a href="#contact" class="help-cta">See who's waiting →</a>
+        <div class="help-note">Link your adoption page or form here.</div>
+      </div>
+      <div class="help-card">
+        <div class="help-eyebrow">Donate</div>
+        <div class="help-title">Cover a vet bill</div>
+        <div class="help-body">A donation goes straight to food, medicine and spay/neuter. One-off or monthly — every dollar stretches further on the island.</div>
+        <a href="#contact" class="help-cta">Donate →</a>
+        <div class="help-note">Add your donation link (e.g. PayPal, GoFundMe).</div>
+      </div>
+      <div class="help-card">
+        <div class="help-eyebrow">Foster</div>
+        <div class="help-title">Open a room</div>
+        <div class="help-body">Fostering saves two lives — the animal you take in, and the one that takes their place. We cover food and vet costs.</div>
+        <a href="#contact" class="help-cta">Apply to foster →</a>
+        <div class="help-note">Link your foster application form here.</div>
+      </div>
+      <div class="help-card">
+        <div class="help-eyebrow">Volunteer</div>
+        <div class="help-title">Lend a hand</div>
+        <div class="help-body">Dog walking, bath days, transport runs, photography — there's a job that fits almost any schedule.</div>
+        <a href="#contact" class="help-cta">Volunteer →</a>
+        <div class="help-note">Link your volunteer form here.</div>
+      </div>
+      <div class="help-card">
+        <div class="help-eyebrow">Shop</div>
+        <div class="help-title">Buy a bag of chews</div>
+        <div class="help-body">Treat your own pet and feed a rescue at the same time. Every order helps fund the next intake.</div>
+        <a href="#chews" class="help-cta">Shop chews →</a>
+        <div class="help-note">Add your shop or stockist link here.</div>
+      </div>
+      <div class="help-card">
+        <div class="help-eyebrow">Share</div>
+        <div class="help-title">Spread the word</div>
+        <div class="help-body">Follow along, share an adoption post, or tell a friend. Quiet shares move more animals than you'd think.</div>
+        <a href="#contact" class="help-cta">Follow us →</a>
+        <div class="help-note">Add your social links in the footer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM REEL -->
+<section class="reel-section">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.55);">Latest Reel</div>
+    <h2 class="reel-title">Watch the rescue update on Instagram</h2>
+    <p class="reel-sub">See the latest Green Door Jamaica moment and share it with someone who can foster, donate, adopt, or help after Hurricane Mellissa.</p>
+    <a href="#" class="reel-btn">
+      <div class="reel-ig">▶</div>
+      Open Instagram Reel
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Contact &amp; booking</div>
+      <h2 class="section-title">Adoption, grooming or chews — say hello.</h2>
+      <p class="section-sub">Tell us what you need — meeting an animal, booking a groom, ordering chews, or offering a hand. We'll get back as soon as the dogs let us.</p>
+    </div>
+    <div class="contact-inner fade-up">
+      <div class="contact-items">
+        <div class="c-item">
+          <div class="c-icon">✉️</div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val">hello@example.com</div>
+            <div class="c-note">Add your real address here.</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📱</div>
+          <div>
+            <div class="c-label">Phone / WhatsApp</div>
+            <div class="c-val">+1 (000) 000-0000</div>
+            <div class="c-note">Add your booking number here.</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📅</div>
+          <div>
+            <div class="c-label">Booking</div>
+            <div class="c-val">Add your booking link here</div>
+            <div class="c-note">e.g. Calendly or a grooming scheduler.</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Address</div>
+            <div class="c-val">Shared on confirmation</div>
+            <div class="c-note">Or paste a public street address.</div>
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="handleForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your name</label>
+            <input class="form-input" type="text" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" name="email" placeholder="jane@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">I'm here to…</label>
+          <select class="form-select" name="reason">
+            <option>Adopt or meet an animal</option>
+            <option>Book a grooming appointment</option>
+            <option>Order chews or treats</option>
+            <option>Apply to foster</option>
+            <option>Volunteer</option>
+            <option>Donate or sponsor</option>
+            <option>Report an animal in need</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Anything we should know?</label>
+          <textarea class="form-textarea" name="message" placeholder="Your pet's name, the dog you're curious about, your schedule…"></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg class="footer-paw" viewBox="0 0 44 48" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="22" cy="36" rx="14" ry="11" fill="currentColor"/>
+            <ellipse cx="7"  cy="22" rx="5"   ry="6.5" fill="currentColor"/>
+            <ellipse cx="16" cy="13" rx="5.5" ry="7"   fill="currentColor"/>
+            <ellipse cx="28" cy="13" rx="5.5" ry="7"   fill="currentColor"/>
+            <ellipse cx="37" cy="22" rx="5"   ry="6.5" fill="currentColor"/>
+          </svg>
+          The Green Door Jamaica
+        </div>
+        <div class="footer-tagline">For the dogs, cats &amp; people of the island.</div>
+        <div class="footer-social">
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="Facebook" style="font-style:normal;font-weight:700;">f</a>
+          <a href="#" title="TikTok">♪</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Rescue</div>
+        <ul>
+          <li><a href="#rescue">About the rescue</a></li>
+          <li><a href="#mellissa">Hurricane Mellissa</a></li>
+          <li><a href="#help">Adopt</a></li>
+          <li><a href="#help">Foster</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <ul>
+          <li><a href="#chews">Slow-roast chews</a></li>
+          <li><a href="#chews">Training bites</a></li>
+          <li><a href="#chews">Island botanicals</a></li>
+          <li><a href="#chews">Rescue bundles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Help out</div>
+        <ul>
+          <li><a href="#help">Donate</a></li>
+          <li><a href="#help">Volunteer</a></li>
+          <li><a href="#chews">Shop</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Green Door Jamaica.</span>
+      <span>For the dogs, cats &amp; people of the island.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav
+  function openNav() {
+    document.getElementById('mobileNav').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeNavOutside(e) {
+    if (e.target === document.getElementById('mobileNav')) closeNav();
+  }
+
+  // Scroll-triggered fade-up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => io.observe(el));
+
+  // Contact form
+  async function handleForm(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.background = '';
+
+    try {
+      const res = await fetch('https://formspree.io/f/mnjrdrav', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Message sent ✓';
+        btn.style.background = 'var(--green-dark)';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = 'Send message';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#b94040';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#b94040';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>

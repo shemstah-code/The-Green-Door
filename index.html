@@ -396,6 +396,39 @@
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
     }
 
+    /* ── DONATION MODAL ── */
+    .donate-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 300; align-items: center; justify-content: center; padding: 24px; }
+    .donate-modal.open { display: flex; }
+    .donate-box {
+      background: var(--white); border-radius: 20px; padding: 40px; max-width: 520px; width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18); position: relative;
+      animation: modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+    .donate-close { position: absolute; top: 16px; right: 20px; font-size: 22px; cursor: pointer; color: var(--muted); line-height: 1; background: none; border: none; }
+    .donate-close:hover { color: var(--text); }
+    .donate-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; }
+    .donate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .donate-sub { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+    .donate-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .donate-option {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 24px 16px; border-radius: var(--radius-lg); border: 1.5px solid var(--border);
+      text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s;
+      color: var(--text); cursor: pointer;
+    }
+    .donate-option:hover { border-color: var(--green-mid); box-shadow: var(--shadow); }
+    .donate-option-icon { font-size: 28px; margin-bottom: 10px; }
+    .donate-option-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .donate-option-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+    .donate-option-btn { font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 100px; }
+    .donate-option-btn.go { background: var(--green); color: var(--white); }
+    .donate-option-btn.wi { background: var(--amber); color: var(--white); }
+    .donate-option:hover .donate-option-btn.go { background: var(--green-dark); }
+    .donate-option:hover .donate-option-btn.wi { background: var(--amber-light); }
+    .donate-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 18px; }
+    @media (max-width: 480px) { .donate-options { grid-template-columns: 1fr; } }
+
     /* ── FADE UP ── */
     .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -424,7 +457,7 @@
       <li><a href="#help">Help out</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#help" class="btn btn-primary nav-cta nav-cta-desktop">Adopt &amp; donate</a>
+    <a href="#" class="btn btn-primary nav-cta nav-cta-desktop" onclick="openDonate(); return false;">Donate</a>
     <div class="nav-hamburger" id="hamburger" onclick="openNav()">
       <span></span><span></span><span></span>
     </div>
@@ -441,7 +474,7 @@
     <a href="#grooming" onclick="closeNav()">Grooming</a>
     <a href="#help"     onclick="closeNav()">Help out</a>
     <a href="#contact"  onclick="closeNav()">Contact</a>
-    <a href="#help" class="btn btn-green" style="margin-top:20px;justify-content:center;" onclick="closeNav()">Adopt &amp; donate</a>
+    <a href="#" class="btn btn-green" style="margin-top:20px;justify-content:center;" onclick="closeNav(); openDonate(); return false;">Donate</a>
   </div>
 </div>
 
@@ -755,8 +788,7 @@
         <div class="help-eyebrow">Donate</div>
         <div class="help-title">Cover a vet bill</div>
         <div class="help-body">A donation goes straight to food, medicine and spay/neuter. One-off or monthly — every dollar stretches further on the island.</div>
-        <a href="#contact" class="help-cta">Donate →</a>
-        <div class="help-note">Add your donation link (e.g. PayPal, GoFundMe).</div>
+        <a href="#" class="help-cta" onclick="openDonate(); return false;">Donate →</a>
       </div>
       <div class="help-card">
         <div class="help-eyebrow">Foster</div>
@@ -881,6 +913,31 @@
   </div>
 </section>
 
+<!-- DONATION MODAL -->
+<div class="donate-modal" id="donateModal" onclick="closeDonateOutside(event)">
+  <div class="donate-box">
+    <button class="donate-close" onclick="closeDonate()">✕</button>
+    <div class="donate-eyebrow">Support the rescue</div>
+    <h2 class="donate-title">Every dollar keeps a rescue going.</h2>
+    <p class="donate-sub">Donations go straight to food, vet care, spay/neuter, and transport. Choose the option that works best for you.</p>
+    <div class="donate-options">
+      <a href="https://gofundme.com/YOUR-CAMPAIGN" target="_blank" rel="noopener" class="donate-option">
+        <div class="donate-option-icon">🌍</div>
+        <div class="donate-option-name">International</div>
+        <div class="donate-option-desc">GoFundMe — donate from anywhere in the world.</div>
+        <span class="donate-option-btn go">Donate via GoFundMe</span>
+      </a>
+      <a href="https://wipay.co/YOUR-LINK" target="_blank" rel="noopener" class="donate-option">
+        <div class="donate-option-icon">🇯🇲</div>
+        <div class="donate-option-name">Jamaica</div>
+        <div class="donate-option-desc">WiPay — fast local card payment from Jamaica.</div>
+        <span class="donate-option-btn wi">Donate via WiPay</span>
+      </a>
+    </div>
+    <p class="donate-note">All donations are used directly for animal care. Thank you.</p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
@@ -924,7 +981,7 @@
       <div class="footer-col">
         <div class="footer-col-title">Help out</div>
         <ul>
-          <li><a href="#help">Donate</a></li>
+          <li><a href="#" onclick="openDonate(); return false;">Donate</a></li>
           <li><a href="#help">Volunteer</a></li>
           <li><a href="#chews">Shop</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -939,8 +996,22 @@
 </footer>
 
 <script>
-  // ── REPLACE THIS with your Calendly link once your account is set up ──
-  const BOOKING_URL = 'https://calendly.com/YOUR-LINK';
+  // ── REPLACE THESE with your real links when accounts are set up ──
+  const BOOKING_URL   = 'https://calendly.com/YOUR-LINK';
+  const GOFUNDME_URL  = 'https://gofundme.com/YOUR-CAMPAIGN';
+  const WIPAY_URL     = 'https://wipay.co/YOUR-LINK';
+
+  function openDonate() {
+    document.getElementById('donateModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDonate() {
+    document.getElementById('donateModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeDonateOutside(e) {
+    if (e.target === document.getElementById('donateModal')) closeDonate();
+  }
 
   function openBooking(service) {
     if (typeof Calendly === 'undefined') {

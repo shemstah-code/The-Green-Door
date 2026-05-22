@@ -54,40 +54,68 @@
     /* ── ANIMAL CARDS ── */
     .animal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .animal-card {
-      background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border);
+      background: var(--white); border-radius: 16px; border: 1px solid var(--border);
       overflow: hidden; display: flex; flex-direction: column;
-      transition: box-shadow 0.2s, border-color 0.2s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .animal-card:hover { box-shadow: var(--shadow-md); border-color: var(--border); }
+    .animal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+
     .animal-photo {
-      height: 200px; background: var(--sand);
+      height: 220px; position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      font-size: 56px; position: relative; overflow: hidden;
     }
-    .animal-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .animal-photo.dog-placeholder {
+      background: linear-gradient(135deg, #d4edda 0%, #a8d5b5 100%);
+    }
+    .animal-photo.cat-placeholder {
+      background: linear-gradient(135deg, #fdecd0 0%, #f5cfa0 100%);
+    }
+    .animal-photo-emoji {
+      font-size: 72px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+      line-height: 1;
+    }
+    .animal-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; inset: 0;
+      transition: transform 0.4s ease;
+    }
+    .animal-card:hover .animal-photo img { transform: scale(1.04); }
+
     .animal-status {
-      position: absolute; top: 12px; left: 12px;
+      position: absolute; top: 14px; left: 14px;
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 100px;
+      padding: 5px 12px; border-radius: 100px;
+      backdrop-filter: blur(8px);
     }
-    .status-available { background: var(--green-pale); color: var(--green-dark); }
-    .status-fostered  { background: rgba(197,131,0,0.12); color: var(--amber); }
-    .status-adopted   { background: rgba(0,0,0,0.07); color: var(--muted); }
-    .animal-body { padding: 20px 22px 24px; flex: 1; display: flex; flex-direction: column; }
-    .animal-meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-    .animal-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-    .animal-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
-    .animal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .animal-tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: var(--sand); color: var(--text); }
+    .status-available { background: rgba(234,249,232,0.92); color: var(--green-dark); }
+    .status-fostered  { background: rgba(255,243,220,0.92); color: var(--amber); }
+    .status-adopted   { background: rgba(255,255,255,0.85); color: var(--muted); }
+
+    .animal-body { padding: 22px 24px 26px; flex: 1; display: flex; flex-direction: column; }
+    .animal-meta {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .animal-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 10px; color: var(--text);
+    }
+    .animal-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 18px; flex: 1; }
+    .animal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .animal-tag {
+      font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+      background: var(--sand); color: var(--text); border: 1px solid var(--border);
+    }
     .animal-cta {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 10px 20px; border-radius: 100px; font-size: 13px; font-weight: 600;
-      background: var(--green); color: var(--white); transition: background 0.15s;
-      text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 12px 20px; border-radius: 100px; font-size: 14px; font-weight: 600;
+      background: var(--green); color: var(--white);
+      transition: background 0.15s, transform 0.15s;
     }
-    .animal-cta:hover { background: var(--green-dark); }
-    .animal-cta.fostered { background: var(--sand); color: var(--text); cursor: default; }
-    .animal-cta.adopted  { background: var(--sand); color: var(--muted); cursor: default; }
+    .animal-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .animal-cta.fostered { background: var(--sand); color: var(--muted); cursor: default; pointer-events: none; }
+    .animal-cta.adopted  { background: var(--sand); color: var(--muted); cursor: default; pointer-events: none; }
 
     .no-results { text-align: center; padding: 60px 24px; color: var(--muted); font-size: 16px; grid-column: 1/-1; }
 
@@ -231,21 +259,27 @@
       grid.innerHTML = '<p class="no-results">No animals match that filter right now — check back soon.</p>';
       return;
     }
-    grid.innerHTML = animals.map(a => `
-      <div class="animal-card">
-        <div class="animal-photo">
-          ${a.photo ? `<img src="${a.photo}" alt="${a.name}" />` : SPECIES_EMOJI[a.species] || '🐾'}
-          <span class="animal-status ${statusClass(a.status)}">${a.status}</span>
-        </div>
-        <div class="animal-body">
-          <div class="animal-meta">${a.species} · ${a.breed} · ${a.age} · ${a.sex}</div>
-          <div class="animal-name">${a.name}</div>
-          <div class="animal-desc">${a.desc}</div>
-          ${a.tags.length ? `<div class="animal-tags">${a.tags.map(t => `<span class="animal-tag">${t}</span>`).join('')}</div>` : ''}
-          <a href="index.html#contact" class="animal-cta ${a.status === 'Fostered' ? 'fostered' : a.status === 'Adopted' ? 'adopted' : ''}">${ctaLabel(a.status)}</a>
-        </div>
-      </div>
-    `).join('');
+    grid.innerHTML = animals.map(a => {
+      const placeholderClass = a.species === 'Cat' ? 'cat-placeholder' : 'dog-placeholder';
+      const photoContent = a.photo
+        ? `<img src="${a.photo}" alt="${a.name}" />`
+        : `<span class="animal-photo-emoji">${SPECIES_EMOJI[a.species] || '🐾'}</span>`;
+      const ctaClass = a.status === 'Fostered' ? 'fostered' : a.status === 'Adopted' ? 'adopted' : '';
+      return `
+        <div class="animal-card">
+          <div class="animal-photo ${a.photo ? '' : placeholderClass}">
+            ${photoContent}
+            <span class="animal-status ${statusClass(a.status)}">${a.status}</span>
+          </div>
+          <div class="animal-body">
+            <div class="animal-meta">${a.species} · ${a.breed} · ${a.age} · ${a.sex}</div>
+            <div class="animal-name">${a.name}</div>
+            <div class="animal-desc">${a.desc}</div>
+            ${a.tags.length ? `<div class="animal-tags">${a.tags.map(t => `<span class="animal-tag">${t}</span>`).join('')}</div>` : ''}
+            <a href="index.html#contact" class="animal-cta ${ctaClass}">${ctaLabel(a.status)}</a>
+          </div>
+        </div>`;
+    }).join('');
   }
 
   let allAnimals = [];

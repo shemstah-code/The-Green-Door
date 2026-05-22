@@ -32,7 +32,7 @@
     }
 
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: var(--text); background: var(--cream); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: background-color 0.7s cubic-bezier(0.25,0.1,0.25,1); }
     h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.15; letter-spacing: -0.03em; font-weight: 800; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
@@ -153,7 +153,7 @@
 
     /* ── SECTIONS ── */
     .section { padding: 96px 0; }
-    .section-alt { background: var(--sand); }
+    .section-alt { }
     .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
     .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; margin-bottom: 16px; }
     .section-sub { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.8; }
@@ -462,7 +462,7 @@
 
 
 <!-- WHAT WE DO -->
-<section class="section" style="background:#e5e2dc;" id="rescue">
+<section class="section" data-bg="#e5e2dc" id="rescue">
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-label">What we do</div>
@@ -487,7 +487,7 @@
 </section>
 
 <!-- MISSION -->
-<section class="section section-alt">
+<section class="section section-alt" data-bg="#f3f0ec">
   <div class="container">
     <div class="mission-inner">
       <div class="fade-up">
@@ -525,7 +525,7 @@
 </section>
 
 <!-- BONE + SNUGGLE -->
-<section class="section">
+<section class="section" data-bg="#fdfbfa">
   <div class="container">
     <div class="steps-split fade-up">
       <div>
@@ -641,7 +641,7 @@
 </section>
 
 <!-- CHEWS -->
-<section class="section section-alt" id="chews">
+<section class="section section-alt" data-bg="#f3f0ec" id="chews">
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-label">Chews &amp; treats</div>
@@ -686,7 +686,7 @@
 </section>
 
 <!-- GROOMING -->
-<section class="section" id="grooming">
+<section class="section" data-bg="#fdfbfa" id="grooming">
   <div class="container">
     <div class="grooming-inner">
       <div class="fade-up">
@@ -734,7 +734,7 @@
 </section>
 
 <!-- WAYS TO HELP -->
-<section class="section section-alt" id="help">
+<section class="section section-alt" data-bg="#f3f0ec" id="help">
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-label">Ways to help</div>
@@ -802,7 +802,7 @@
 </section>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
+<section class="section" data-bg="#fdfbfa" id="contact">
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-label">Contact &amp; booking</div>
@@ -997,6 +997,21 @@
     });
   }, { threshold: 0.08 });
   fadeEls.forEach(el => io.observe(el));
+
+  // Scroll background blending
+  (function() {
+    const bgSections = document.querySelectorAll('[data-bg]');
+    function updateBodyBg() {
+      const trigger = window.scrollY + window.innerHeight * 0.45;
+      let active = null;
+      bgSections.forEach(s => {
+        if (s.offsetTop <= trigger) active = s;
+      });
+      if (active) document.body.style.backgroundColor = active.dataset.bg;
+    }
+    window.addEventListener('scroll', updateBodyBg, { passive: true });
+    updateBodyBg();
+  })();
 
   // Contact form
   async function handleForm(e) {

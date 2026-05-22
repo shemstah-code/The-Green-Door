@@ -1,0 +1,62 @@
+[
+  {
+    "id": "biscuit",
+    "name": "Biscuit",
+    "species": "Dog",
+    "breed": "Mixed breed",
+    "age": "2 years",
+    "sex": "Male",
+    "status": "Available",
+    "desc": "Arrived skinny and shy but has blossomed into a tail-wagging, food-motivated sweetheart. Good with calm dogs. Ready for a patient home.",
+    "photo": "",
+    "tags": ["Good with dogs", "Food motivated"]
+  },
+  {
+    "id": "pepper",
+    "name": "Pepper",
+    "species": "Cat",
+    "breed": "Domestic shorthair",
+    "age": "1 year",
+    "sex": "Female",
+    "status": "Available",
+    "desc": "Street cat found near New Kingston. Fully vaccinated, spayed, and now thoroughly convinced that laps exist for her comfort alone.",
+    "photo": "",
+    "tags": ["Lap cat", "Indoor only"]
+  },
+  {
+    "id": "rum",
+    "name": "Rum",
+    "species": "Dog",
+    "breed": "Potcake mix",
+    "age": "4 years",
+    "sex": "Male",
+    "status": "Fostered",
+    "desc": "Big personality, medium size. Rum came in after Hurricane Mellissa and is currently in foster care. Loves long walks and hates being ignored.",
+    "photo": "",
+    "tags": ["Active", "Needs space"]
+  },
+  {
+    "id": "sugar",
+    "name": "Sugar",
+    "species": "Dog",
+    "breed": "Mixed breed",
+    "age": "5 months",
+    "sex": "Female",
+    "status": "Available",
+    "desc": "Found as a tiny pup near Portmore. Sugar is bold, bouncy, and will need basic training — but she learns fast and loves everyone she meets.",
+    "photo": "",
+    "tags": ["Puppy", "High energy"]
+  },
+  {
+    "id": "patchy",
+    "name": "Patchy",
+    "species": "Cat",
+    "breed": "Domestic shorthair",
+    "age": "3 years",
+    "sex": "Male",
+    "status": "Available",
+    "desc": "A calico-patterned gentleman who has been waiting quietly for the right home. Calm, observant, and happiest with a window perch and a warm spot to sleep.",
+    "photo": "",
+    "tags": ["Calm", "Good with cats"]
+  }
+]

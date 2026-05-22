@@ -161,8 +161,8 @@
 
     /* ── GLANCE CARDS ── */
     .glance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .glance-card { background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); transition: border-color 0.2s; }
-    .glance-card:hover { border-color: var(--green-mid); }
+    .glance-card { display: block; background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); transition: border-color 0.15s, box-shadow 0.15s; cursor: pointer; }
+    .glance-card:hover { border-color: var(--green-mid); box-shadow: var(--shadow); }
     .glance-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
     .glance-value { font-family: 'DM Sans', sans-serif;font-size: 20px; font-weight: 600; line-height: 1.35; }
     @media (max-width: 600px) { .glance-grid { grid-template-columns: 1fr; } }
@@ -470,18 +470,18 @@
       <p class="section-sub">Based in Jamaica. Working island-wide. For the dogs, cats and the people who love them.</p>
     </div>
     <div class="glance-grid fade-up">
-      <div class="glance-card">
+      <a href="where.html" class="glance-card">
         <div class="glance-label">Where</div>
         <div class="glance-value">Based in Jamaica · island-wide</div>
-      </div>
-      <div class="glance-card">
+      </a>
+      <a href="animals.html" class="glance-card">
         <div class="glance-label">We care for</div>
         <div class="glance-value">Dogs &amp; cats, mostly strays</div>
-      </div>
-      <div class="glance-card">
+      </a>
+      <a href="services.html" class="glance-card">
         <div class="glance-label">We offer</div>
         <div class="glance-value">Adoption · chews · grooming</div>
-      </div>
+      </a>
     </div>
   </div>
 </section>

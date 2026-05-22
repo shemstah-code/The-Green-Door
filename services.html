@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -197,21 +199,21 @@
             <div class="service-item-name">Bath and tidy</div>
             <div class="service-item-desc">Warm bath, nail trim, ear clean, light brush-out.</div>
           </div>
-          <a href="index.html#contact" class="service-badge badge-green">Book →</a>
+          <a href="#" class="service-badge badge-green" onclick="return openBooking('bath-and-tidy')">Book →</a>
         </div>
         <div class="service-item">
           <div>
             <div class="service-item-name">Full groom</div>
             <div class="service-item-desc">Breed-appropriate cut, de-shed, paws and sanitary trim.</div>
           </div>
-          <a href="index.html#contact" class="service-badge badge-green">Book →</a>
+          <a href="#" class="service-badge badge-green" onclick="return openBooking('full-groom')">Book →</a>
         </div>
         <div class="service-item">
           <div>
             <div class="service-item-name">Puppy and senior intro</div>
             <div class="service-item-desc">A short, low-pressure session for first-timers.</div>
           </div>
-          <a href="index.html#contact" class="service-badge badge-green">Book →</a>
+          <a href="#" class="service-badge badge-green" onclick="return openBooking('puppy-senior-intro')">Book →</a>
         </div>
         <div class="service-item">
           <div>
@@ -235,5 +237,14 @@
   </div>
 </section>
 
+<script>
+  const BOOKING_URL = 'https://calendly.com/YOUR-LINK';
+  function openBooking(service) {
+    if (typeof Calendly === 'undefined') { window.open(BOOKING_URL, '_blank'); return false; }
+    const url = service ? BOOKING_URL + '/' + service : BOOKING_URL;
+    Calendly.initPopupWidget({ url });
+    return false;
+  }
+</script>
 </body>
 </html>

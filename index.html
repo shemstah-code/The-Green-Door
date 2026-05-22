@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -693,7 +695,7 @@
         <div class="section-label">Grooming</div>
         <h2 class="section-title">Gentle grooming, on your pet's pace.</h2>
         <p style="color:var(--muted);font-size:15px;line-height:1.75;margin-top:14px;margin-bottom:28px;">Many of our visitors are first-time groomees, rescues, or seniors who've had a hard time. We take it slow, work in a quiet space, and never rush a nervous animal.</p>
-        <a href="#contact" class="btn btn-green">Book a groom</a>
+        <a href="#" class="btn btn-green" onclick="return openBooking()">Book a groom</a>
         <div class="grooming-note">
           <div class="grooming-note-quote">"We never rush a nervous animal."</div>
           <div class="grooming-note-body">Short sessions, soft handling, and breaks build trust. Grooming should feel safe, not scary — so we let each animal set the pace.</div>
@@ -705,21 +707,21 @@
             <div class="service-name">Bath &amp; tidy</div>
             <div class="service-desc">Warm bath, nail trim, ear clean, light brush-out.</div>
           </div>
-          <a href="#contact" class="service-badge badge-book">Book →</a>
+          <a href="#" class="service-badge badge-book" onclick="return openBooking('bath-and-tidy')">Book →</a>
         </div>
         <div class="service-card">
           <div>
             <div class="service-name">Full groom</div>
             <div class="service-desc">Breed-appropriate cut, de-shed, paws &amp; sanitary trim.</div>
           </div>
-          <a href="#contact" class="service-badge badge-book">Book →</a>
+          <a href="#" class="service-badge badge-book" onclick="return openBooking('full-groom')">Book →</a>
         </div>
         <div class="service-card">
           <div>
             <div class="service-name">Puppy &amp; senior intro</div>
             <div class="service-desc">A short, low-pressure session for first-timers.</div>
           </div>
-          <a href="#contact" class="service-badge badge-book">Book →</a>
+          <a href="#" class="service-badge badge-book" onclick="return openBooking('puppy-senior-intro')">Book →</a>
         </div>
         <div class="service-card">
           <div>
@@ -937,6 +939,19 @@
 </footer>
 
 <script>
+  // ── REPLACE THIS with your Calendly link once your account is set up ──
+  const BOOKING_URL = 'https://calendly.com/YOUR-LINK';
+
+  function openBooking(service) {
+    if (typeof Calendly === 'undefined') {
+      window.open(BOOKING_URL, '_blank');
+      return false;
+    }
+    const url = service ? BOOKING_URL + '/' + service : BOOKING_URL;
+    Calendly.initPopupWidget({ url });
+    return false;
+  }
+
   // Sticky nav
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
